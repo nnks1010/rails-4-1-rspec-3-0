@@ -35,6 +35,11 @@ describe Contact do
     expect(contact.errors[:email]).to include("has already been taken")
   end
 
+  # 3つの電話番号を持つこと
+  it "has three phone numbers" do
+    expect(create(:contact).phones.count).to eq 3
+  end
+
   # 連絡先のフルネームを文字列として返すこと
   it "returns a contact's full name as a string" do
     contact = build(:contact,
@@ -47,17 +52,20 @@ describe Contact do
   # 文字で姓をフィルタする
   describe "filter last name by letter" do
     before :each do
-      @smith = Contact.create(
+      @smith = create(
+        :contact,
         firstname: 'John',
         lastname: 'Smith',
         email: 'jsmith@example.com'
       )
-      @jones = Contact.create(
+      @jones = create(
+        :contact,
         firstname: 'Tim',
         lastname: 'Jones',
         email: 'tjones@example.com'
       )
-      @johnson = Contact.create(
+      @johnson = create(
+        :contact,
         firstname: 'John',
         lastname: 'Johnson',
         email: 'jjohnson@example.com'
