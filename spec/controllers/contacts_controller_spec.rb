@@ -208,8 +208,7 @@ describe ContactsController do
 
   describe "adminstrator access" do
     before :each do
-      user = create(:admin)
-      session[:user_id] = user.id
+      set_user_session create(:admin)
     end
 
     it_behaves_like 'public access to contacts'
@@ -218,8 +217,7 @@ describe ContactsController do
 
   describe "user access" do
     before :each do
-      user = create(:user)
-      session[:user_id] = user.id
+      set_user_session create(:user)
     end
 
     it_behaves_like 'public access to contacts'
